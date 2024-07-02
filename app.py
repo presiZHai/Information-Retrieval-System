@@ -2,9 +2,7 @@ import streamlit as st
 from src.helper import get_pdf_text, get_text_chunk, get_vector_store, get_conversational_chain
 
 def user_input(user_question):
-    english_instruction = "Respond in English to the following question: "
-    full_question = english_instruction + user_question
-    response = st.session_state.conversation({'question': full_question})
+    response = st.session_state.conversation({'question': user_question})
     st.session_state.chatHistory = response['chat_history']
     for i, message in enumerate(st.session_state.chatHistory):
         if i%2  == 0:
