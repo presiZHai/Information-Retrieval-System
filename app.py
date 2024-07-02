@@ -17,7 +17,7 @@ def user_input(user_question):
 def main():
     st.set_page_config("Information Retrieval System")
     st.header("DocuChat: :blue[Chat with Your Documents] 💁")  
-    st.subheader(':green[_Turn static PDFs into interactive knowledge_]')
+    st.subheader(':blue-background[:green[_Turn static PDFs into interactive knowledge_]]')
     
     if "conversation" not in st.session_state:
         st.session_state.conversation = None
@@ -26,8 +26,8 @@ def main():
     
     with st.sidebar:
         st.title("Menu")
-        pdf_docs = st.file_uploader("Upload your PDF files and click the Submit and Process button.",
-                                    accept_multiple_files=True)
+        pdf_docs = st.file_uploader(":orange[Upload your PDF files and click the Submit and Process button.]",
+                                    accept_multiple_files=True) 
         if st.button("Submit & Process"):
             with st.spinner("Processing...."):
                 raw_data = get_pdf_text(pdf_docs)
@@ -36,7 +36,7 @@ def main():
                 st.session_state.conversation = get_conversational_chain(vector_store)
                 st.success("Done")
 
-    user_question = st.text_input("Ask questions about your PDF files: :blue[Start Now!]")
+    user_question = st.text_input(":red[Ask questions about your PDF files:] :blue[Start Now!]")
     
     if user_question:
         if st.session_state.conversation is None:
