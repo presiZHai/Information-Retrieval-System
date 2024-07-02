@@ -39,15 +39,9 @@ def get_vector_store(text_chunks):
 def get_conversational_chain(vector_store):
     llm = GoogleGenerativeAI(model="gemini-pro", language="en")
     conversation_memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
-    system_message = "Always respond in English, regardless of the input language."
     conversational_chain = ConversationalRetrievalChain.from_llm(
         llm=llm,
         retriever=vector_store.as_retriever(), 
-        memory=conversation_memory,
-        verbose=True,
-        return_source_documents=True,
-        max_tokens_limit=4096,
-        system_message=system_message
-        
+        memory=conversation_memory, 
     )
     return conversational_chain
